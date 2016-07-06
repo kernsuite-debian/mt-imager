@@ -5,7 +5,7 @@ Maintainer: Gijs Molenaar <gijs@pythonic.nl>
 Build-Depends: debhelper (>= 8.0.0), cmake, nvidia-cuda-toolkit, libboost-dev,
  casacore-dev, libcfitsio3-dev, liblog4cxx10-dev, libboost-system-dev,
  libboost-thread-dev, libboost-regex-dev, libhdf5-dev, libboost-chrono-dev, gcc,
- g++
+ g++, wcslib-dev
 Standards-Version: 3.9.2
 Homepage: http://www.mtimager.com/
 
