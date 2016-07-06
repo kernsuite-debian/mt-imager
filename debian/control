@@ -3,9 +3,9 @@ Section: science
 Priority: extra
 Maintainer: Gijs Molenaar <gijs@pythonic.nl>
 Build-Depends: debhelper (>= 8.0.0), cmake, nvidia-cuda-toolkit, libboost-dev,
- libcasacore2-dev, libcfitsio3-dev, liblog4cxx10-dev, libboost-system-dev,
- libboost-thread-dev, libboost-regex-dev, libhdf5-dev, libboost-chrono-dev, gcc-4.6,
- g++-4.6
+ casacore-dev, libcfitsio3-dev, liblog4cxx10-dev, libboost-system-dev,
+ libboost-thread-dev, libboost-regex-dev, libhdf5-dev, libboost-chrono-dev, gcc,
+ g++
 Standards-Version: 3.9.2
 Homepage: http://www.mtimager.com/
 
