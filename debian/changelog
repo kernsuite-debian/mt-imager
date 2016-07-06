@@ -1,3 +1,9 @@
+mt-imager (1.0-1kern1) xenial; urgency=medium
+
+  * first kern release
+
+ -- Gijs Molenaar (launchpad ppa build key) <gijs@pythonic.nl>  Wed, 06 Jul 2016 10:10:33 +0000
+
 mt-imager (1.0-4trusty) trusty; urgency=medium
 
   * compile against casacore2
