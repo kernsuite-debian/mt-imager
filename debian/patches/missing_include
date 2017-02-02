@@ -1,0 +1,20 @@
+Description: missing include
+Author: Gijs Molenaar <gijs@pythonic.nl>
+
+--- mt-imager-1.0.orig/code/gafw/Implimentation/StandardOperators/cuFFTException.cpp
++++ mt-imager-1.0/code/gafw/Implimentation/StandardOperators/cuFFTException.cpp
+@@ -20,6 +20,7 @@
+ #include "cuFFTException.h"
+ #include <cufft.h>
+ #include <string>
++#include<stdio.h>
+ //#include <sstream>
+ using namespace std;
+ using namespace GAFW;
+@@ -146,4 +147,4 @@ const char* cuFFTException::what() const
+     s+=this->linenumber;
+     s+="\n";
+     return s.c_str();
+-}
+\ No newline at end of file
++}
