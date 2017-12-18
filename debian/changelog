@@ -1,3 +1,9 @@
+mt-imager (1.0-1kern4) xenial; urgency=medium
+
+  * fi compilation of CUDA code
+
+ -- KERN packaging <packaging@kernsuite.info>  Mon, 18 Dec 2017 12:50:54 +0200
+
 mt-imager (1.0-1kern3) xenial; urgency=medium
 
   * trigger rebuild

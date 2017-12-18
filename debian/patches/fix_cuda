@@ -1,0 +1,43 @@
+Description: Fix compilation of cuda code
+Author: KERN packaging <packaging@kernsuite.info>
+
+--- mt-imager-1.0.orig/code/gafw/CMakeLists.txt
++++ mt-imager-1.0/code/gafw/CMakeLists.txt
+@@ -11,7 +11,7 @@ FILE(GLOB PILCppSources pil/*.cpp)
+ FILE(GLOB ImplCppSources Implimentation/GeneralImplimentation/*.cpp Implimentation/GPUImplimentation/*.cpp Implimentation/StandardOperators/*.cpp)
+ FILE(GLOB ImplCuSources Implimentation/StandardOperators/*.cu)
+ 
+-set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_20;--ptxas-options=-v;-Xcompiler;-fPIC)
++set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_20;--ptxas-options=-v;-Xcompiler;-fPIC;-D_FORCE_INLINES )
+ cuda_compile(ImplNVCCCompiled ${ImplCuSources} )
+ 
+ add_library(gafw-tools SHARED ${ToolsCppSources} )
+--- mt-imager-1.0.orig/code/gafw/Implimentation/StandardOperators/CMakeLists.txt
++++ mt-imager-1.0/code/gafw/Implimentation/StandardOperators/CMakeLists.txt
+@@ -7,7 +7,7 @@ include_directories(${CUDA_INCLUDE_DIRS}
+ include_directories(../pil ../tools/CppProperties ../GeneralImplimentation ../GPUImplimentation )
+ FILE(GLOB MyCUSources *.cu)
+ FILE(GLOB MyCPPSources *.cpp)
+-set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_20;--ptxas-options=-v;-Xcompiler;-fPIC)
++set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_20;--ptxas-options=-v;-Xcompiler;-fPIC;-D_FORCE_INLINES )
+ cuda_compile(CompiledCuda ${MyCUSources} )
+ add_library(gafw-gpu-standardoperators SHARED ${MyCPPSources} ${CompiledCuda} )
+ target_link_libraries(gafw-gpu-standardoperators ${CUDA_LIBRARIES} ${CUDA_CUFFT_LIBRARIES}  ) 
+--- mt-imager-1.0.orig/code/mt-imager/lib/CMakeLists.txt
++++ mt-imager-1.0/code/mt-imager/lib/CMakeLists.txt
+@@ -14,7 +14,7 @@ include_directories(${CASACORE_INCLUDE_D
+ include_directories(components/ components/ConvolutionFunctionsGenerator components/statistics components/VisibilityManager operators .)
+ include_directories(${GAFW_PIL_INCLUDE_DIR} ${GAFW_TOOLS_INCLUDE_DIR} ${GAFW_IMPL_INCLUDE_DIR} )
+ FILE(GLOB MyCUSources operators/*.cu)
+-set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_30;--ptxas-options=-v;-Xcompiler;-fPIC)
++set(CUDA_NVCC_FLAGS -lineinfo;--maxrregcount=32;-arch=sm_30;--ptxas-options=-v;-Xcompiler;-fPIC;-D_FORCE_INLINES )
+ cuda_compile(CompiledCuda ${MyCUSources} )
+ set (CMAKE_CXX_FLAGS "-DDEFAULT_CONF_FILE=${CMAKE_INSTALL_PREFIX}/conf/mtimager.properties")
+ 
+@@ -25,4 +25,4 @@ target_link_libraries(mt-imager-lib ${CA
+ target_link_libraries(mt-imager-lib ${Boost_LIBRARIES})
+ target_link_libraries(mt-imager-lib ${CFITSIO_LIBRARY})
+ 
+-install(TARGETS mt-imager-lib LIBRARY DESTINATION lib)
+\ No newline at end of file
++install(TARGETS mt-imager-lib LIBRARY DESTINATION lib)
